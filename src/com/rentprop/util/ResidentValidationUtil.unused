@@ -1,0 +1,63 @@
+package com.rentprop.util;
+
+import com.rentprop.dto.ResidentDTO;
+
+public class ResidentValidationUtil {
+	public String mandatory(ResidentDTO ResidentDTO) {
+
+		if (ResidentDTO.getFirst_name().isEmpty() && ResidentDTO.getLast_name().isEmpty()
+				&& ResidentDTO.getEmail_id().isEmpty() && ResidentDTO.getAddress().isEmpty()
+				&& ResidentDTO.getUser_id().isEmpty() && ResidentDTO.getPassword().isEmpty()) {
+			return "All fields are Mandatory";
+		}
+
+		else if (ResidentDTO.getFirst_name().isEmpty() || ResidentDTO.getFirst_name().trim().length() <= 0) {
+			return "First Name is mandatory!";
+		}
+
+		else if (ResidentDTO.getLast_name().isEmpty() || ResidentDTO.getLast_name().trim().length() <= 0) {
+			return "Last Name is mandatory!";
+		}
+
+		else if (ResidentDTO.getEmail_id().isEmpty() || ResidentDTO.getEmail_id().trim().length() <= 0) {
+			return "Email Id is mandatory!";
+		}
+
+		else if (ResidentDTO.getUser_id().isEmpty() || ResidentDTO.getUser_id().trim().length() <= 0) {
+			return "User Id is mandatory!";
+		} else if (ResidentDTO.getPassword().isEmpty() || ResidentDTO.getPassword().trim().length() <= 0) {
+			return "Password is mandatory!";
+		}
+
+		return "success";
+
+	}
+
+	public String parameters_resident(ResidentDTO ResidentDTO) {
+
+		if (ResidentDTO.getFirst_name().matches("[a-zA-Z]+")) {
+			if (ResidentDTO.getLast_name().matches("[a-zA-Z]+")) {
+				if (ResidentDTO.getEmail_id().matches("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$")) {
+					if (ResidentDTO.getUser_id().matches("[a-zA-Z][0-9]")) {
+						if (ResidentDTO.getPassword().matches("[a-zA-Z][0-9]")) {
+							return "success";
+						} else {
+							return "Password should be alph-numeric";
+						}
+					} else {
+						return "User Id should be alpha-numeric";
+					}
+
+				} else {
+					return "Invalid Email Id";
+				}
+			} else {
+				return "Last Name should be alphabets only!";
+			}
+
+		} else {
+			return "First Name should be alphabets only!";
+		}
+
+	}
+}
